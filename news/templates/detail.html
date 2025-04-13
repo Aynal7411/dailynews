@@ -1,0 +1,14 @@
+<!-- templates/news/detail.html -->
+{% extends 'base.html' %}
+{% block content %}
+<article>
+    <h1>{{ article.title }}</h1>
+    <p class="text-muted">
+        <small>By {{ article.author }} | {{ article.created_at|date:"F j, Y" }}</small>
+    </p>
+    <img src="{{ article.image.url }}" class="img-fluid mb-4" alt="{{ article.title }}">
+    <div>
+        {{ article.content|linebreaks }}
+    </div>
+</article>
+{% endblock %}

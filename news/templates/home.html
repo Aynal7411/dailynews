@@ -1,0 +1,43 @@
+<!-- templates/news/home.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="row">
+    <!-- Sidebar: Categories -->
+    <div class="col-md-3 mb-4">
+        <h4>Categories</h4>
+        <ul class="list-group">
+            {% for cat in categories %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'category_news' cat.slug %}" class="text-decoration-none">
+                    {{ cat.name }}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Main Content: Articles -->
+    <div class="col-md-9">
+        <h2 class="mb-4">Latest News</h2>
+        <div class="row">
+            {% for article in articles %}
+            <div class="col-md-6 mb-4">
+                <div class="card h-100 shadow-sm">
+                    {% if article.image %}
+                    <img src="{{ article.image.url }}" class="card-img-top" alt="{{ article.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ article.title }}</h5>
+                        <p class="card-text">{{ article.content|truncatewords:25 }}</p>
+                        <a href="{% url 'news_detail' article.slug %}" class="btn btn-primary btn-sm">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
